@@ -77,12 +77,13 @@ let rl = readline.createInterface({
   output: process.stdout
 });
 
-let eq = new RandomEquation(); 
+let timestamp = new Date().getTime();
+let seed = timestamp%1000
+let eq = new RandomEquation(seed); 
 let cnt = 1;
-let total = 3;
+let total = 10;
 let point = 0;
 console.log('Quiz Begin!');
-
 var recursiveAsyncReadLine = function () {
   rl.question(eq.question, function (answer) {
     let input = Number(answer);
@@ -100,7 +101,7 @@ var recursiveAsyncReadLine = function () {
       console.log('Wrong! now Point:' + point);
     }
     if(cnt >= total){
-      console.log("quiz ends!");
+      console.log("quiz ends! your point is:" + point + '/' + total);
       return rl.close(); //closing RL and returning from function.
     }
     cnt = cnt + 1;
